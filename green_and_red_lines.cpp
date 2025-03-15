@@ -1,50 +1,4 @@
-#include <iostream>
-#include <thread>
-#include <chrono>
-#include <mutex>
-#include <string>
-#include <vector>
-#include <cstdlib>
-#include <ctime>
-#include <fstream>
-
-std::mutex mtx_Icherisheher_left;
-std::mutex mtx_Icherisheher_right;
-std::mutex mtx_Sahil_left;
-std::mutex mtx_Sahil_right;
-std::mutex mtx_28_May_left;
-std::mutex mtx_28_May_right;
-std::mutex mtx_Ganjlik_left;
-std::mutex mtx_Ganjlik_right;
-std::mutex mtx_Nariman_Narimanov_left;
-std::mutex mtx_Nariman_Narimanov_right;
-std::mutex mtx_Bakmil;
-
-std::mutex mtx_Xodjasan;
-std::mutex mtx_Avtovogzal_left;
-std::mutex mtx_Avtovogzal_right;
-std::mutex mtx_Memar_Adjemi_violet_left;
-std::mutex mtx_Memar_Adjemi_violet_right;
-std::mutex mtx_8_Noyabr_left;
-std::mutex mtx_8_Noyabr_right;
-
-std::mutex mtx_Ulduz_left;
-std::mutex mtx_Ulduz_right;
-std::mutex mtx_Koroglu_left;
-std::mutex mtx_Koroglu_right;
-std::mutex mtx_Gara_Garayev_left;
-std::mutex mtx_Gara_Garayev_right; 
-std::mutex mtx_Neftchiler_left;
-std::mutex mtx_Neftchiler_right;
-std::mutex mtx_Xalqlar_Dostlugu_left;
-std::mutex mtx_Xalqlar_Dostlugu_right;
-std::mutex mtx_Ahmedli_left;
-std::mutex mtx_Ahmedli_right;
-std::mutex mtx_Hazi_Aslanov_left;
-std::mutex mtx_Hazi_Aslanov_right;
-
-std::mutex mtx_Cafar_Cabbarli;
-std::mutex mtx_Xatai;
+#include "metro.h"
 
 std::mutex mtx_Nizami_left;
 std::mutex mtx_Nizami_right;
@@ -62,28 +16,31 @@ std::mutex mtx_Azadliq_prospekti_left;
 std::mutex mtx_Azadliq_prospekti_right;
 std::mutex mtx_Darnagul_left;
 std::mutex mtx_Darnagul_right;
-
-void chill_red(int id)
-{
-    std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-    file_red_line << id << " is chilling\n";
-    std::this_thread::sleep_for(std::chrono::seconds(5));
-}
-
-void chill_violet(int id)
-{
-    std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " is chilling\n";
-    std::this_thread::sleep_for(std::chrono::seconds(5));
-}
-
-void chill_light_green(int id)
-{
-    std::ofstream file_light_green_line("output_light_green_line.txt", std::ios::app);
-    file_light_green_line << id << " is chilling\n";
-    std::this_thread::sleep_for(std::chrono::seconds(5));
-}
-
+std::mutex mtx_Ulduz_left;
+std::mutex mtx_Ulduz_right;
+std::mutex mtx_Koroglu_left;
+std::mutex mtx_Koroglu_right;
+std::mutex mtx_Gara_Garayev_left;
+std::mutex mtx_Gara_Garayev_right; 
+std::mutex mtx_Neftchiler_left;
+std::mutex mtx_Neftchiler_right;
+std::mutex mtx_Xalqlar_Dostlugu_left;
+std::mutex mtx_Xalqlar_Dostlugu_right;
+std::mutex mtx_Ahmedli_left;
+std::mutex mtx_Ahmedli_right;
+std::mutex mtx_Hazi_Aslanov_left;
+std::mutex mtx_Hazi_Aslanov_right;
+std::mutex mtx_Icherisheher_left;
+std::mutex mtx_Icherisheher_right;
+std::mutex mtx_Sahil_left;
+std::mutex mtx_Sahil_right;
+std::mutex mtx_28_May_left;
+std::mutex mtx_28_May_right;
+std::mutex mtx_Ganjlik_left;
+std::mutex mtx_Ganjlik_right;
+std::mutex mtx_Nariman_Narimanov_left;
+std::mutex mtx_Nariman_Narimanov_right;
+std::mutex mtx_Bakmil;
 
 void chill_green(int id)
 {
@@ -92,21 +49,14 @@ void chill_green(int id)
     std::this_thread::sleep_for(std::chrono::seconds(5));
 }
 
-//-----------------------------------------------------------------------------------
+void chill_red(int id)
+{
+    std::ofstream file_red_line("output_red_line.txt", std::ios::app);
+    file_red_line << id << " is chilling\n";
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+}
 
 void station_red(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
-{
-    faylik << id << " in " << str << " station from " << from << "\n";
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-}
-
-void station_light_green(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
-{
-    faylik << id << " in " << str << " station from " << from << "\n";
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-}
-
-void station_violet(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
 {
     faylik << id << " in " << str << " station from " << from << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -117,9 +67,6 @@ void station_green(int id, const std::string &str, std::ofstream &faylik, const 
     faylik << id << " in " << str << " station from " << from << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
 }
-
-//-----------------------------------------------------------------------------
-// red line 1
 
 void Icherisheher(int id, const std::string &from, const std::string &movement)
 {
@@ -310,9 +257,6 @@ void Bakmil(int id, const std::string &from, const std::string &movement, const 
         lock.unlock();
     }
 }
-
-//-------------------------------------------------------------------------
-//  red line 2
 
 void Ulduz(int id, const std::string &from, const std::string &movement, const std::string &color)
 {
@@ -608,109 +552,6 @@ void Hazi_Aslanov(int id, const std::string &from, const std::string &movement, 
     }
 }
 
-
-//----------------------------------------------------------------------------
-//  violet line
-
-void Xodjasan(int id, const std::string &from, const std::string &movement)
-{
-    std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way Xodjasan from " << from << "\n";
-    std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Xodjasan";
-    std::unique_lock<std::mutex> lock(mtx_Xodjasan);
-    station_violet(id, str, file_violet_line, movement);
-    lock.unlock();
-}
-
-void Avtovogzal(int id, const std::string &from, const std::string &movement)
-{
-    std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way Avtovogzal from " << from << "\n";
-    std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Avtovogzal";
-    if(movement == "left")
-    {   
-        std::unique_lock<std::mutex> lock(mtx_Avtovogzal_left);
-        station_violet(id, str, file_violet_line, movement);
-        lock.unlock();
-    }
-    else if(movement == "right")
-    {
-        std::unique_lock<std::mutex> lock(mtx_Avtovogzal_right);
-        station_violet(id, str, file_violet_line, movement);
-        lock.unlock();
-    }
-}
-
-void Memar_Adjemi_violet(int id, const std::string &from, const std::string &movement)
-{
-    std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way Memar Adjemi from " << from << "\n";
-    std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Memar Adjemi";
-    if(movement == "left")
-    {
-        std::unique_lock<std::mutex> lock(mtx_Memar_Adjemi_violet_left);
-        station_violet(id, str, file_violet_line, movement);
-        lock.unlock();
-    }
-    else if(movement == "right")
-    {
-        std::unique_lock<std::mutex> lock(mtx_Memar_Adjemi_violet_right);
-        station_violet(id, str, file_violet_line, movement);
-        lock.unlock();
-    }
-}
-
-void Noyabr_8(int id, const std::string &from, const std::string &movement)
-{
-    std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way 8 Noyabr from " << from << "\n";
-    std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "8 Noyabr";
-    if(movement == "left")
-    {
-        std::unique_lock<std::mutex> lock(mtx_8_Noyabr_left);
-        station_violet(id, str, file_violet_line, movement);
-        lock.unlock();
-    }
-    else if(movement == "right")
-    {
-        std::unique_lock<std::mutex> lock(mtx_8_Noyabr_right);
-        station_violet(id, str, file_violet_line, movement);
-        lock.unlock();
-    }
-}
-
-//----------------------------------------------------------------------------------
-//  light green line
-
-void Cafar_Cabbarli(int id, const std::string &from, const std::string &movement)
-{
-    std::ofstream file_light_green_line("output_light_green_line.txt", std::ios::app);
-    file_light_green_line << id << " in way Cafar Cabbarli from " << from << "\n";
-    std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Cafar Cabbarli";
-    std::unique_lock<std::mutex> lock(mtx_Cafar_Cabbarli);
-    station_light_green(id, str, file_light_green_line, movement);
-    lock.unlock();
-}
-
-void Xatai(int id, const std::string &from, const std::string &movement)
-{
-    std::ofstream file_light_green_line("output_light_green_line.txt", std::ios::app);
-    file_light_green_line << id << " in way Xatai from " << from << "\n";
-    std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Xatai";
-    std::unique_lock<std::mutex> lock(mtx_Xatai);
-    station_light_green(id, str, file_light_green_line, movement);
-    lock.unlock();
-}
-
-//-----------------------------------------------------------------------
-//  green line
-
 void Nizami(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_green_line("output_green_line.txt", std::ios::app);
@@ -872,8 +713,6 @@ void Darnagul(int id, const std::string &from, const std::string &movement)
     }
 }
 
-//-----------------------------------------------------------------------
-
 void train_green(int id)
 {
     chill_green(id);
@@ -933,7 +772,6 @@ void train_green(int id)
     Bakmil(id,"Nariman Narimanov", "left", "green");
 }
 
-
 void train_red(int id)
 {
     chill_red(id);
@@ -987,46 +825,6 @@ void train_red(int id)
     Bakmil(id, "Nariman Narimanov", "left", "red");
 }
 
-void train_violet(int id)
-{
-    chill_violet(id);
-    Xodjasan(id, "Depo", "Depo");
-    int i = 0;
-    while(i < 70)
-    {
-        Avtovogzal(id, "Xodjasan", "left");
-        Memar_Adjemi_violet(id, "Avtovogzal", "left");
-        Noyabr_8(id, "Memar_Adjemi", "left");
-        chill_violet(id);
-        Memar_Adjemi_violet(id, "8 Noyabr", "right");
-        Avtovogzal(id, "Memar_Adjemi", "right");
-        if(i == 68)
-        {
-            break;
-        }
-        Xodjasan(id, "Avtovogzal", "right");
-        chill_violet(id);
-        i++;
-    }
-
-    Xodjasan(id, "Avtovogzal", "right");
-}
-
-void train_light_green(int id)
-{
-    int i = 0;
-    chill_light_green(id);
-    Xatai(id, "Depo", "Depo");
-    while(i < 40)
-    {
-        Cafar_Cabbarli(id, "Xatai", "right");
-        Xatai(id, "Cafar Cabbarli", "left");
-        i++;
-    }
-}
-
-//-------------------------------------------------
-
 void void_red_train()
 {
     std::vector<std::thread> train_red_vec;
@@ -1048,62 +846,6 @@ void void_red_train()
     }
 
     for(auto &tr: train_red_vec)
-    {
-        tr.join();
-    }
-}
-
-void void_violet_line()
-{
-    std::vector<std::thread> train_violet_vec;
-
-    int num;
-
-    for(size_t i = 0; i != 6; i++)
-    {
-        std::srand(std::time(nullptr));
-
-        num = rand() % 1000;
-        num += 1137;
-        num %= 1000;
-        num += 1000;
-
-        std::thread t_v(train_violet, num);
-
-        train_violet_vec.push_back(std::move(t_v));
-        
-        std::this_thread::sleep_for(std::chrono::seconds(5));
-    }
-
-    for(auto &tr: train_violet_vec)
-    {
-        tr.join();
-    }
-}
-
-void void_light_green_line()
-{
-    std::vector<std::thread> train_light_green_vec;
-
-    int num;
-
-    for(size_t i = 0; i != 2; i++)
-    {
-        std::srand(std::time(nullptr));
-
-        num = rand() % 1000;
-        num += 1259;
-        num %= 1000;
-        num += 1000;
-
-        std::thread t_g_l(train_light_green, num);
-
-        train_light_green_vec.push_back(std::move(t_g_l));
-        
-        std::this_thread::sleep_for(std::chrono::seconds(5));
-    }
-
-    for(auto &tr: train_light_green_vec)
     {
         tr.join();
     }
@@ -1135,19 +877,4 @@ void void_green_line()
     {
         tr.join();
     }
-}
-
-int main()
-{
-    std::thread red_line(void_red_train);
-    std::thread violet_line(void_violet_line);
-    std::thread light_green_line(void_light_green_line);
-    std::thread green_line(void_green_line);
-
-    red_line.join();
-    violet_line.join();
-    light_green_line.join();
-    green_line.join();
-
-    return 0;
 }
