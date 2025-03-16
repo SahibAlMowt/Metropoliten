@@ -47,14 +47,14 @@ void scaled_sleep(int sim_minutes)
 
 void chill_violet(int id)
 {
-    std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " is chilling\n";
+    std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
+    file_violet_line << id << " is chilling\n\n";
     scaled_sleep(5);
 }
 
 void station_violet(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
 {
-    faylik << id << " in " << str << " station from " << from << " in " << get_time() << "\n";
+    faylik << id << " in " << str << " station from " << from << " in " << get_time() << "\n\n";
     scaled_sleep(1);
 }
 
@@ -63,10 +63,10 @@ void station_violet(int id, const std::string &str, std::ofstream &faylik, const
 
 void Xodjasan(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way Xodjasan from " << from << " time " << get_time() << "\n";
+    std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
+    file_violet_line << id << " in way <span style='color:purple;'>Xodjasan</span> from " << from << " time " << get_time() << "\n\n";
     scaled_sleep(3);
-    std::string str = "Xodjasan";
+    std::string str = "<span style='color:purple;'>Xodjasan</span>";
     std::unique_lock<std::mutex> lock(mtx_Xodjasan);
     station_violet(id, str, file_violet_line, movement);
     lock.unlock();
@@ -74,11 +74,11 @@ void Xodjasan(int id, const std::string &from, const std::string &movement)
 
 void Avtovogzal(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way Avtovogzal from " << from << " time " << get_time() << "\n";
+    std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
+    file_violet_line << id << " in way <span style='color:purple;'>Avtovogzal</span> from " << from << " time " << get_time() << "\n\n";
     scaled_sleep(3);
   //  file_violet_line << id << " after sleep " << get_time() << "\n";
-    std::string str = "Avtovogzal";
+    std::string str = "<span style='color:purple;'>Avtovogzal</span>";
     if(movement == "left")
     {   
         std::unique_lock<std::mutex> lock(mtx_Avtovogzal_left);
@@ -95,10 +95,10 @@ void Avtovogzal(int id, const std::string &from, const std::string &movement)
 
 void Memar_Adjemi_violet(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way Memar Adjemi from " << from << " time " << get_time() << "\n";
+    std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
+    file_violet_line << id << " in way <span style='color:purple;'>Memar Adjemi</span> from " << from << " time " << get_time() << "\n\n";
     scaled_sleep(3);
-    std::string str = "Memar Adjemi";
+    std::string str = "<span style='color:purple;'>Memar Adjemi</span>";
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_Memar_Adjemi_violet_left);
@@ -115,10 +115,10 @@ void Memar_Adjemi_violet(int id, const std::string &from, const std::string &mov
 
 void Noyabr_8(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way 8 Noyabr from " << from << " time " << get_time() << "\n";
+    std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
+    file_violet_line << id << " in way <span style='color:purple;'>8 Noyabr</span> from " << from << " time " << get_time() << "\n\n";
     scaled_sleep(3);
-    std::string str = "8 Noyabr";
+    std::string str = "<span style='color:purple;'>8 Noyabr</span>";
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_8_Noyabr_left);
@@ -140,22 +140,22 @@ void train_violet(int id)
     int i = 0;
     while(i < 70)
     {
-        Avtovogzal(id, "Xodjasan", "left");
-        Memar_Adjemi_violet(id, "Avtovogzal", "left");
-        Noyabr_8(id, "Memar_Adjemi", "left");
+        Avtovogzal(id, "<span style='color:purple;'>Xodjasan</span>", "left");
+        Memar_Adjemi_violet(id, "<span style='color:purple;'>Avtovogzal</span>", "left");
+        Noyabr_8(id, "<span style='color:purple;'>Memar_Adjemi</span>", "left");
         chill_violet(id);
-        Memar_Adjemi_violet(id, "8 Noyabr", "right");
-        Avtovogzal(id, "Memar_Adjemi", "right");
+        Memar_Adjemi_violet(id, "<span style='color:purple;'>8 Noyabr</span>", "right");
+        Avtovogzal(id, "<span style='color:purple;'>Memar_Adjemi</span>", "right");
         if(i == 68)
         {
             break;
         }
-        Xodjasan(id, "Avtovogzal", "right");
+        Xodjasan(id, "<span style='color:purple;'>Avtovogzal</span>", "right");
         chill_violet(id);
         i++;
     }
 
-    Xodjasan(id, "Avtovogzal", "right");
+    Xodjasan(id, "<span style='color:purple;'>Avtovogzal</span>", "right");
 }
 
 void void_violet_line()

@@ -1,18 +1,20 @@
 #include "metro.h"
 
+#define MAKE_LIGHT_GREEN_COLOR(text) "<span style='color:#90EE90;'>" text "</span>"
+
 std::mutex mtx_Cafar_Cabbarli;
 std::mutex mtx_Xatai;
 
 void chill_light_green(int id)
 {
-    std::ofstream file_light_green_line("output_light_green_line.txt", std::ios::app);
-    file_light_green_line << id << " is chilling\n";
+    std::ofstream file_light_green_line("output_light_green_line.md", std::ios::app);
+    file_light_green_line << id << " is chilling\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(5));
 }
 
 void station_light_green(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
 {
-    faylik << id << " in " << str << " station from " << from << "\n";
+    faylik << id << " in " << str << " station from " << from << "\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
@@ -21,10 +23,10 @@ void station_light_green(int id, const std::string &str, std::ofstream &faylik, 
 
 void Cafar_Cabbarli(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_light_green_line("output_light_green_line.txt", std::ios::app);
-    file_light_green_line << id << " in way Cafar Cabbarli from " << from << "\n";
+    std::ofstream file_light_green_line("output_light_green_line.md", std::ios::app);
+    file_light_green_line << id << " in way " << MAKE_LIGHT_GREEN_COLOR("Cafar Cabbarli") << " from " << from << "\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Cafar Cabbarli";
+    std::string str = MAKE_LIGHT_GREEN_COLOR("Cafar Cabbarli");
     std::unique_lock<std::mutex> lock(mtx_Cafar_Cabbarli);
     station_light_green(id, str, file_light_green_line, movement);
     lock.unlock();
@@ -32,10 +34,10 @@ void Cafar_Cabbarli(int id, const std::string &from, const std::string &movement
 
 void Xatai(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_light_green_line("output_light_green_line.txt", std::ios::app);
-    file_light_green_line << id << " in way Xatai from " << from << "\n";
+    std::ofstream file_light_green_line("output_light_green_line.md", std::ios::app);
+    file_light_green_line << id << " in way " << MAKE_LIGHT_GREEN_COLOR("Xatai") << " from " << from << "\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Xatai";
+    std::string str = MAKE_LIGHT_GREEN_COLOR("Xatai");
     std::unique_lock<std::mutex> lock(mtx_Xatai);
     station_light_green(id, str, file_light_green_line, movement);
     lock.unlock();
@@ -48,8 +50,8 @@ void train_light_green(int id)
     Xatai(id, "Depo", "Depo");
     while(i < 40)
     {
-        Cafar_Cabbarli(id, "Xatai", "right");
-        Xatai(id, "Cafar Cabbarli", "left");
+        Cafar_Cabbarli(id, MAKE_LIGHT_GREEN_COLOR("Xatai"), "right");
+        Xatai(id, MAKE_LIGHT_GREEN_COLOR("Cafar Cabbarli"), "left");
         i++;
     }
 }
