@@ -11,18 +11,6 @@
 #include <ctime>
 #include <fstream>
 
-#include <iomanip>
-
-//-----------------------------------------------
-// add.cpp
-
-void website();
-void update_time(int add_minutes);
-std::string get_time();
-void scaled_sleep(int sim_minutes);
-
-//-----------------------------------------------
-
 //-----------------------------------------------
 //  light_green_line.cpp
 

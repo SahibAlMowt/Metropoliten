@@ -3,12 +3,21 @@
 void website()
 {
     std::string str_mes;
-    std::cout << "do you want to visit the website?\n";
+    std::cout << "do you want to visit the website? (yes or !yes)\n";
     std::cin >> str_mes;
     if(str_mes == "yes")
-    {
-        system("start https://metro.gov.az/en/page/xetlerimiz/konseptual-sxem");
-        system("xdg-open https://metro.gov.az/en/page/xetlerimiz/konseptual-sxem");
+    {   
+        #ifdef _WIN32
+        {
+            system("start https://metro.gov.az/en/page/xetlerimiz/konseptual-sxem");
+        }
+        #elif __linux__
+        {
+            system("xdg-open https://metro.gov.az/en/page/xetlerimiz/konseptual-sxem");
+        }
+        #else
+        std::cout << "Unsupported OS\n";
+        #endif
     }
     else
     {

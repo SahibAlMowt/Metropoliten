@@ -1,0 +1,24 @@
+1702 is chilling
+1702 in way Xodjasan from Depo
+1702 in Xodjasan station from Depo
+1718 is chilling
+1702 in way Avtovogzal from Xodjasan
+1702 in Avtovogzal station from left
+1718 in way Xodjasan from Depo
+1718 in Xodjasan station from Depo
+1735 is chilling
+1702 in way Memar Adjemi from Avtovogzal
+1702 in Memar Adjemi station from left
+1718 in way Avtovogzal from Xodjasan
+1718 in Avtovogzal station from left
+1735 in way Xodjasan from Depo
+1735 in Xodjasan station from Depo
+1751 is chilling
+1702 in way 8 Noyabr from Memar_Adjemi
+1702 in 8 Noyabr station from left
+1718 in way Memar Adjemi from Avtovogzal
+1718 in Memar Adjemi station from left
+1735 in way Avtovogzal from Xodjasan
+1735 in Avtovogzal station from left
+1751 in way Xodjasan from Depo
+1751 in Xodjasan station from Depo

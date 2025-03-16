@@ -8,54 +8,17 @@ std::mutex mtx_Memar_Adjemi_violet_right;
 std::mutex mtx_8_Noyabr_left;
 std::mutex mtx_8_Noyabr_right;
 
-std::mutex time_mutex;
-int sim_hours = 5;
-int sim_minutes = 0;
-
-void update_time(int add_minutes)
-{
-    std::lock_guard<std::mutex> lock(time_mutex);
-    sim_minutes += add_minutes;
-    
-    while (sim_minutes >= 60) {
-        sim_minutes -= 60;
-        sim_hours++;
-    }
-    
-    if (sim_hours >= 24)
-    {
-        sim_hours -= 24; 
-    } 
-}
-
-std::string get_time()
-{
-    std::lock_guard<std::mutex> lock(time_mutex);
-    std::ostringstream oss;
-    oss << std::setw(2) << std::setfill('0') << sim_hours << ":"
-        << std::setw(2) << std::setfill('0') << sim_minutes;
-    return oss.str();
-}
-
-void scaled_sleep(int sim_minutes)
-{
-    std::this_thread::sleep_for(std::chrono::seconds(sim_minutes));
-    update_time(sim_minutes);
-}
-
-
-
 void chill_violet(int id)
 {
     std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
     file_violet_line << id << " is chilling\n";
-    scaled_sleep(5);
+    std::this_thread::sleep_for(std::chrono::seconds(5));
 }
 
 void station_violet(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
 {
-    faylik << id << " in " << str << " station from " << from << " in " << get_time() << "\n";
-    scaled_sleep(1);
+    faylik << id << " in " << str << " station from " << from << "\n";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
 
@@ -64,8 +27,8 @@ void station_violet(int id, const std::string &str, std::ofstream &faylik, const
 void Xodjasan(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way Xodjasan from " << from << " time " << get_time() << "\n";
-    scaled_sleep(3);
+    file_violet_line << id << " in way Xodjasan from " << from << "\n";
+    std::this_thread::sleep_for(std::chrono::seconds(3));
     std::string str = "Xodjasan";
     std::unique_lock<std::mutex> lock(mtx_Xodjasan);
     station_violet(id, str, file_violet_line, movement);
@@ -75,9 +38,8 @@ void Xodjasan(int id, const std::string &from, const std::string &movement)
 void Avtovogzal(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way Avtovogzal from " << from << " time " << get_time() << "\n";
-    scaled_sleep(3);
-  //  file_violet_line << id << " after sleep " << get_time() << "\n";
+    file_violet_line << id << " in way Avtovogzal from " << from << "\n";
+    std::this_thread::sleep_for(std::chrono::seconds(3));
     std::string str = "Avtovogzal";
     if(movement == "left")
     {   
@@ -96,8 +58,8 @@ void Avtovogzal(int id, const std::string &from, const std::string &movement)
 void Memar_Adjemi_violet(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way Memar Adjemi from " << from << " time " << get_time() << "\n";
-    scaled_sleep(3);
+    file_violet_line << id << " in way Memar Adjemi from " << from << "\n";
+    std::this_thread::sleep_for(std::chrono::seconds(3));
     std::string str = "Memar Adjemi";
     if(movement == "left")
     {
@@ -116,8 +78,8 @@ void Memar_Adjemi_violet(int id, const std::string &from, const std::string &mov
 void Noyabr_8(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.txt", std::ios::app);
-    file_violet_line << id << " in way 8 Noyabr from " << from << " time " << get_time() << "\n";
-    scaled_sleep(3);
+    file_violet_line << id << " in way 8 Noyabr from " << from << "\n";
+    std::this_thread::sleep_for(std::chrono::seconds(3));
     std::string str = "8 Noyabr";
     if(movement == "left")
     {
@@ -177,7 +139,7 @@ void void_violet_line()
 
         train_violet_vec.push_back(std::move(t_v));
         
-        scaled_sleep(5);
+        std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 
     for(auto &tr: train_violet_vec)
