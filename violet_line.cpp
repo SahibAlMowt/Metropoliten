@@ -1,5 +1,7 @@
 #include "metro.h"
 
+#define MAKE_VIOLET_COLOR(text) "<span style='color:purple;'>" text "</span>"
+
 std::mutex mtx_Xodjasan;
 std::mutex mtx_Avtovogzal_left;
 std::mutex mtx_Avtovogzal_right;
@@ -64,9 +66,9 @@ void station_violet(int id, const std::string &str, std::ofstream &faylik, const
 void Xodjasan(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
-    file_violet_line << id << " in way <span style='color:purple;'>Xodjasan</span> from " << from << " time " << get_time() << "\n\n";
+    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("Xodjasan") << " from " << from << " time " << get_time() << "\n\n";
     scaled_sleep(3);
-    std::string str = "<span style='color:purple;'>Xodjasan</span>";
+    std::string str = MAKE_VIOLET_COLOR("Xodjasan");
     std::unique_lock<std::mutex> lock(mtx_Xodjasan);
     station_violet(id, str, file_violet_line, movement);
     lock.unlock();
@@ -75,10 +77,9 @@ void Xodjasan(int id, const std::string &from, const std::string &movement)
 void Avtovogzal(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
-    file_violet_line << id << " in way <span style='color:purple;'>Avtovogzal</span> from " << from << " time " << get_time() << "\n\n";
+    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("Avtovogzal") << " from " << from << " time " << get_time() << "\n\n";
     scaled_sleep(3);
-  //  file_violet_line << id << " after sleep " << get_time() << "\n";
-    std::string str = "<span style='color:purple;'>Avtovogzal</span>";
+    std::string str = MAKE_VIOLET_COLOR("Avtovogzal");
     if(movement == "left")
     {   
         std::unique_lock<std::mutex> lock(mtx_Avtovogzal_left);
@@ -96,9 +97,9 @@ void Avtovogzal(int id, const std::string &from, const std::string &movement)
 void Memar_Adjemi_violet(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
-    file_violet_line << id << " in way <span style='color:purple;'>Memar Adjemi</span> from " << from << " time " << get_time() << "\n\n";
+    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("Memar Adjemi") << " from " << from << " time " << get_time() << "\n\n";
     scaled_sleep(3);
-    std::string str = "<span style='color:purple;'>Memar Adjemi</span>";
+    std::string str = MAKE_VIOLET_COLOR("Memar Adjemi");
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_Memar_Adjemi_violet_left);
@@ -116,9 +117,9 @@ void Memar_Adjemi_violet(int id, const std::string &from, const std::string &mov
 void Noyabr_8(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
-    file_violet_line << id << " in way <span style='color:purple;'>8 Noyabr</span> from " << from << " time " << get_time() << "\n\n";
+    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("8 Noyabr") << " from " << from << " time " << get_time() << "\n\n";
     scaled_sleep(3);
-    std::string str = "<span style='color:purple;'>8 Noyabr</span>";
+    std::string str = MAKE_VIOLET_COLOR("8 Noyabr");
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_8_Noyabr_left);
@@ -140,22 +141,22 @@ void train_violet(int id)
     int i = 0;
     while(i < 70)
     {
-        Avtovogzal(id, "<span style='color:purple;'>Xodjasan</span>", "left");
-        Memar_Adjemi_violet(id, "<span style='color:purple;'>Avtovogzal</span>", "left");
-        Noyabr_8(id, "<span style='color:purple;'>Memar_Adjemi</span>", "left");
+        Avtovogzal(id, MAKE_VIOLET_COLOR("Xodjasan"), "left");
+        Memar_Adjemi_violet(id, MAKE_VIOLET_COLOR("Avtovogzal"), "left");
+        Noyabr_8(id, MAKE_VIOLET_COLOR("Memar Adjemi"), "left");
         chill_violet(id);
-        Memar_Adjemi_violet(id, "<span style='color:purple;'>8 Noyabr</span>", "right");
-        Avtovogzal(id, "<span style='color:purple;'>Memar_Adjemi</span>", "right");
+        Memar_Adjemi_violet(id, MAKE_VIOLET_COLOR("8 Noyabr"), "right");
+        Avtovogzal(id, MAKE_VIOLET_COLOR("Memar Adjemi"), "right");
         if(i == 68)
         {
             break;
         }
-        Xodjasan(id, "<span style='color:purple;'>Avtovogzal</span>", "right");
+        Xodjasan(id, MAKE_VIOLET_COLOR("Avtovogzal"), "right");
         chill_violet(id);
         i++;
     }
 
-    Xodjasan(id, "<span style='color:purple;'>Avtovogzal</span>", "right");
+    Xodjasan(id, MAKE_VIOLET_COLOR("Avtovogzal"), "right");
 }
 
 void void_violet_line()
