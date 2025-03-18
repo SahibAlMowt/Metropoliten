@@ -17,9 +17,9 @@
 // add.cpp
 
 void website();
-void update_time(int add_minutes);
-std::string get_time();
-void scaled_sleep(int sim_minutes);
+void l_g_update_time(int add_minutes);
+std::string l_g_get_time();
+void l_g_sleep(int sim_minutes);
 
 //-----------------------------------------------
 

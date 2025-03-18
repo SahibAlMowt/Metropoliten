@@ -42,38 +42,41 @@ std::mutex mtx_Nariman_Narimanov_left;
 std::mutex mtx_Nariman_Narimanov_right;
 std::mutex mtx_Bakmil;
 
+#define MAKE_RED_COLOR(text) "<span style='color:red;'>" text "</span>"
+#define MAKE_GREEN_COLOR(text) "<span style='color:green;'>" text "</span>"
+
 void chill_green(int id)
 {
-    std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-    file_green_line << id << " is chilling\n";
+    std::ofstream file_green_line("output_green_line.md", std::ios::app);
+    file_green_line << id << " is chilling\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(5));
 }
 
 void chill_red(int id)
 {
-    std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-    file_red_line << id << " is chilling\n";
+    std::ofstream file_red_line("output_red_line.md", std::ios::app);
+    file_red_line << id << " is chilling\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(5));
 }
 
 void station_red(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
 {
-    faylik << id << " in " << str << " station from " << from << "\n";
+    faylik << id << " in " << str << " station from " << from << "\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
 void station_green(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
 {
-    faylik << id << " in " << str << " station from " << from << "\n";
+    faylik << id << " in " << str << " station from " << from << "\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
 void Icherisheher(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-    file_red_line << id << " in way Icherisheher from " << from << "\n";
+    std::ofstream file_red_line("output_red_line.md", std::ios::app);
+    file_red_line << id << " in way " << MAKE_RED_COLOR("Icherisheher") << " from " << from << "\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Icherisheher";
+    std::string str = MAKE_RED_COLOR("Icherisheher");
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_Icherisheher_left);
@@ -90,10 +93,10 @@ void Icherisheher(int id, const std::string &from, const std::string &movement)
 
 void Sahil(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-    file_red_line << id << " in way Sahil from " << from << "\n";
+    std::ofstream file_red_line("output_red_line.md", std::ios::app);
+    file_red_line << id << " in way " << MAKE_RED_COLOR("Sahil") << " from " << from << "\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Sahil";
+    std::string str = MAKE_RED_COLOR("Sahil") ;
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_Sahil_left);
@@ -112,10 +115,10 @@ void May_28(int id, const std::string &from, const std::string &movement, const 
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way 28 May from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("28 May") << " from " << from << "\n\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "28 May";
+        std::string str = MAKE_RED_COLOR("28 May");
         if(movement == "right")
         {
             std::unique_lock<std::mutex> lock(mtx_28_May_right);
@@ -131,10 +134,10 @@ void May_28(int id, const std::string &from, const std::string &movement, const 
     }
     else if(color == "green")
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way 28 May from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("28 May") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "28 May";
+        std::string str = MAKE_GREEN_COLOR("28 May");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_28_May_left);
@@ -154,10 +157,10 @@ void Ganjlik(int id, const std::string &from, const std::string &movement, const
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way Ganjlik from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("Ganjlik") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Ganjlik";
+        std::string str = MAKE_RED_COLOR("Ganjlik");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Ganjlik_left);
@@ -173,10 +176,10 @@ void Ganjlik(int id, const std::string &from, const std::string &movement, const
     }
     else if(color == "green")
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way Ganjlik from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("Ganjlik") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Ganjlik";
+        std::string str = MAKE_GREEN_COLOR("Ganjlik");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Ganjlik_left);
@@ -196,10 +199,10 @@ void Nariman_Narimanov(int id, const std::string &from, const std::string &movem
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way Nariman Narimanov from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("Nariman Narimanov") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Nariman Narimanov";
+        std::string str = MAKE_RED_COLOR("Nariman Narimanov");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Nariman_Narimanov_left);
@@ -215,10 +218,10 @@ void Nariman_Narimanov(int id, const std::string &from, const std::string &movem
     }
     else if(color == "green")
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way Nariman Narimanov from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("Nariman Narimanov") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Nariman Narimanov";
+        std::string str = MAKE_GREEN_COLOR("Nariman Narimanov");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Nariman_Narimanov_left);
@@ -238,20 +241,20 @@ void Bakmil(int id, const std::string &from, const std::string &movement, const 
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way Bakmil from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("Bakmil") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Bakmil";
+        std::string str = MAKE_RED_COLOR("Bakmil");
         std::unique_lock<std::mutex> lock(mtx_Bakmil);
         station_red(id, str, file_red_line, movement);
         lock.unlock();
     }
     else if(color == "green")
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way Bakmil from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("Bakmil") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Bakmil";
+        std::string str = MAKE_GREEN_COLOR("Bakmil");
         std::unique_lock<std::mutex> lock(mtx_Bakmil);
         station_green(id, str, file_green_line, movement);
         lock.unlock();
@@ -262,10 +265,10 @@ void Ulduz(int id, const std::string &from, const std::string &movement, const s
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way Ulduz from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("Ulduz") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Ulduz";
+        std::string str = MAKE_RED_COLOR("Ulduz");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Ulduz_left);
@@ -281,10 +284,10 @@ void Ulduz(int id, const std::string &from, const std::string &movement, const s
     }
     else if(color == "green")
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way Ulduz from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("Ulduz") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Ulduz";
+        std::string str = MAKE_GREEN_COLOR("Ulduz");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Ulduz_left);
@@ -304,10 +307,10 @@ void Koroglu(int id, const std::string &from, const std::string &movement, const
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way Koroglu from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("Koroglu") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Koroglu";
+        std::string str = MAKE_RED_COLOR("Koroglu");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Koroglu_left);
@@ -323,10 +326,10 @@ void Koroglu(int id, const std::string &from, const std::string &movement, const
     }
     else if(color == "green")
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way 28 May from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("Koroglu") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Koroglu";
+        std::string str = MAKE_GREEN_COLOR("Koroglu");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Koroglu_left);
@@ -346,10 +349,10 @@ void Gara_Garayev(int id, const std::string &from, const std::string &movement, 
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way Gara Garayev from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("Gara Garayev") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Gara Garayev";
+        std::string str = MAKE_RED_COLOR("Gara Garayev");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Gara_Garayev_left);
@@ -365,10 +368,10 @@ void Gara_Garayev(int id, const std::string &from, const std::string &movement, 
     }
     else if(color == "green")
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way Gara Garayev from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("Gara Garayev") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Gara Garayev";
+        std::string str = MAKE_GREEN_COLOR("Gara Garayev");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Gara_Garayev_left);
@@ -388,10 +391,10 @@ void Neftchiler(int id, const std::string &from, const std::string &movement, co
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way Neftchiler from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("Neftchiler") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Neftchiler";
+        std::string str = MAKE_RED_COLOR("Neftchiler");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Neftchiler_left);
@@ -407,10 +410,10 @@ void Neftchiler(int id, const std::string &from, const std::string &movement, co
     }
     else if(color == "green")
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way Neftchiler from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("Neftchiler") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Neftchiler";
+        std::string str = MAKE_GREEN_COLOR("Neftchiler");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Neftchiler_left);
@@ -430,10 +433,10 @@ void Xalqlar_Dostlugu(int id, const std::string &from, const std::string &moveme
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way Xalqlar Dostlugu from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("Xalqlar Dostlugu") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Xalqlar Dostlugu";
+        std::string str = MAKE_RED_COLOR("Xalqlar Dostlugu");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Xalqlar_Dostlugu_left);
@@ -449,10 +452,10 @@ void Xalqlar_Dostlugu(int id, const std::string &from, const std::string &moveme
     }
     else if(color == "green")
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way Xalqlar Dostlugu from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("Xalqlar Dostlugu") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Xalqlar Dostlugu";
+        std::string str = MAKE_GREEN_COLOR("Xalqlar Dostlugu");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Xalqlar_Dostlugu_left);
@@ -472,10 +475,10 @@ void Ahmedli(int id, const std::string &from, const std::string &movement, const
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way Ahmedli from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("Ahmedli") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Ahmedli";
+        std::string str = MAKE_RED_COLOR("Ahmedli");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Ahmedli_left);
@@ -491,10 +494,10 @@ void Ahmedli(int id, const std::string &from, const std::string &movement, const
     }
     else
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way Ahmedli from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("Ahmedli") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Ahmedli";
+        std::string str = MAKE_GREEN_COLOR("Ahmedli");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Ahmedli_left);
@@ -514,10 +517,10 @@ void Hazi_Aslanov(int id, const std::string &from, const std::string &movement, 
 {
     if(color == "red")
     {
-        std::ofstream file_red_line("output_red_line.txt", std::ios::app);
-        file_red_line << id << " in way Hazi Aslanov from " << from << "\n";
+        std::ofstream file_red_line("output_red_line.md", std::ios::app);
+        file_red_line << id << " in way " << MAKE_RED_COLOR("Hazi Aslanov") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Hazi Aslanov";
+        std::string str = MAKE_RED_COLOR("Hazi Aslanov");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Hazi_Aslanov_left);
@@ -533,10 +536,10 @@ void Hazi_Aslanov(int id, const std::string &from, const std::string &movement, 
     }
     else if(color == "green")
     {
-        std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-        file_green_line << id << " in way Hazi Aslanov from " << from << "\n";
+        std::ofstream file_green_line("output_green_line.md", std::ios::app);
+        file_green_line << id << " in way " << MAKE_GREEN_COLOR("Hazi Aslanov") << " from " << from << "\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
-        std::string str = "Hazi Aslanov";
+        std::string str = MAKE_GREEN_COLOR("Hazi Aslanov");
         if(movement == "left")
         {
             std::unique_lock<std::mutex> lock(mtx_Hazi_Aslanov_left);
@@ -554,10 +557,10 @@ void Hazi_Aslanov(int id, const std::string &from, const std::string &movement, 
 
 void Nizami(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-    file_green_line << id << " in way Nizami from " << from << "\n";
+    std::ofstream file_green_line("output_green_line.md", std::ios::app);
+    file_green_line << id << " in way " << MAKE_GREEN_COLOR("Nizami") << " from " << from << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Nizami";
+    std::string str = MAKE_GREEN_COLOR("Nizami");
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_Nizami_left);
@@ -574,10 +577,10 @@ void Nizami(int id, const std::string &from, const std::string &movement)
 
 void Elmler_Akademiyasi(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-    file_green_line << id << " in way Elmler Akademiyasi from " << from << "\n";
+    std::ofstream file_green_line("output_green_line.md", std::ios::app);
+    file_green_line << id << " in way " << MAKE_GREEN_COLOR("Elmlər Akademiyası") << " from " << from << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Elmler Akademiyasi";
+    std::string str = MAKE_GREEN_COLOR("Elmler Akademiyasi");
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_Elmler_Akademiyasi_left);
@@ -595,10 +598,10 @@ void Elmler_Akademiyasi(int id, const std::string &from, const std::string &move
 
 void Inshaatchilar(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-    file_green_line << id << " in way Inshaatchilar from " << from << "\n";
+    std::ofstream file_green_line("output_green_line.md", std::ios::app);
+    file_green_line << id << " in way " << MAKE_GREEN_COLOR("Inshaatchilar") << " from " << from << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Inshaatchilar";
+    std::string str = MAKE_GREEN_COLOR("Inshaatchilar");
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_Inshaatchilar_left);
@@ -615,10 +618,10 @@ void Inshaatchilar(int id, const std::string &from, const std::string &movement)
 
 void Yanvar_20(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-    file_green_line << id << " in way 20 Yanvar from " << from << "\n";
+    std::ofstream file_green_line("output_green_line.md", std::ios::app);
+    file_green_line << id << " in way " << MAKE_GREEN_COLOR("20 Yanvar") << " from " << from << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "20 Yanvar";
+    std::string str = MAKE_GREEN_COLOR("20 Yanvar");
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_20_Yanvar_left);
@@ -635,10 +638,10 @@ void Yanvar_20(int id, const std::string &from, const std::string &movement)
 
 void Memar_Adjemi_green(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-    file_green_line << id << " in way Memar Adjemi from " << from << "\n";
+    std::ofstream file_green_line("output_green_line.md", std::ios::app);
+    file_green_line << id << " in way " << MAKE_GREEN_COLOR("Memar Adjemi") << " from " << from << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Memar Adjemi";
+    std::string str = MAKE_GREEN_COLOR("Memar Adjemi");
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_Memar_Adjemi_green_left);
@@ -655,10 +658,10 @@ void Memar_Adjemi_green(int id, const std::string &from, const std::string &move
 
 void Nasimi(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-    file_green_line << id << " in way Nasimi from " << from << "\n";
+    std::ofstream file_green_line("output_green_line.md", std::ios::app);
+    file_green_line << id << " in way " << MAKE_GREEN_COLOR("Nasimi") << " from " << from << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Nasimi";
+    std::string str = MAKE_GREEN_COLOR("Nasimi");
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_Nasimi_left);
@@ -675,10 +678,10 @@ void Nasimi(int id, const std::string &from, const std::string &movement)
 
 void Azadliq_Prospekti(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-    file_green_line << id << " in way Azadliq Prospekti from " << from << "\n";
+    std::ofstream file_green_line("output_green_line.md", std::ios::app);
+    file_green_line << id << " in way " << MAKE_GREEN_COLOR("Azadliq Prospekti") << " from " << from << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Azadliq Prospekti";
+    std::string str = MAKE_GREEN_COLOR("Azadliq Prospekti");
     if(movement == "left")
     {   
         std::unique_lock<std::mutex> lock(mtx_Azadliq_prospekti_left);
@@ -695,10 +698,10 @@ void Azadliq_Prospekti(int id, const std::string &from, const std::string &movem
 
 void Darnagul(int id, const std::string &from, const std::string &movement)
 {
-    std::ofstream file_green_line("output_green_line.txt", std::ios::app);
-    file_green_line << id << " in way Darnagul from " << from << "\n";
+    std::ofstream file_green_line("output_green_line.md", std::ios::app);
+    file_green_line << id << " in way " << MAKE_GREEN_COLOR("Darnagul") << " from " << from << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(3));
-    std::string str = "Darnagul";
+    std::string str = MAKE_GREEN_COLOR("Darnagul");
     if(movement == "left")
     {
         std::unique_lock<std::mutex> lock(mtx_Darnagul_left);
@@ -718,58 +721,58 @@ void train_green(int id)
     chill_green(id);
     Bakmil(id,"Depo", "Depo", "green");
     int i = 0;
-    while(i < 100)
+    while(i < 10)
     {
-        Nariman_Narimanov(id, "Bakmil", "right", "green");
-        if(i == 98)
+        Nariman_Narimanov(id, MAKE_GREEN_COLOR("Bakmil"), "right", "green");
+        if(i == 9)
         {
             break;
         }
-        Ganjlik(id, "Nariman Narimanov", "right", "green");
-        May_28(id, "Ganjlik", "right", "green");
-        Nizami(id, "28 May", "right");
-        Elmler_Akademiyasi(id, "Nizami", "right");
-        Inshaatchilar(id, "Elmler Akademiyasi", "right");
-        Yanvar_20(id, "Inshaatchilar", "right");
-        Memar_Adjemi_green(id, "20 Yanvar", "right");
-        Nasimi(id, "Memar Adjemi", "right");
-        Azadliq_Prospekti(id, "Nasimi", "right");
-        Darnagul(id, "Azadliq Prospekti", "right");
+        Ganjlik(id, MAKE_GREEN_COLOR("Nariman Narimanov"), "right", "green");
+        May_28(id, MAKE_GREEN_COLOR("Ganjlik"), "right", "green");
+        Nizami(id, MAKE_GREEN_COLOR("28 May"), "right");
+        Elmler_Akademiyasi(id, MAKE_GREEN_COLOR("Nizami"), "right");
+        Inshaatchilar(id, MAKE_GREEN_COLOR("Elmler Akademiyasi"), "right");
+        Yanvar_20(id, MAKE_GREEN_COLOR("Inshaatchilar"), "right");
+        Memar_Adjemi_green(id, MAKE_GREEN_COLOR("20 Yanvar"), "right");
+        Nasimi(id, MAKE_GREEN_COLOR("Memar Adjemi"), "right");
+        Azadliq_Prospekti(id, MAKE_GREEN_COLOR("Nasimi"), "right");
+        Darnagul(id, MAKE_GREEN_COLOR("Azadliq Prospekti"), "right");
         chill_green(id);
-        Azadliq_Prospekti(id, "Darnagul", "left");
-        Nasimi(id, "Azadliq Prospekti", "left");
-        Memar_Adjemi_green(id, "Nasimi", "left");
-        Yanvar_20(id, "Memar Adjemi", "left");
-        Inshaatchilar(id, "20 Yanvar", "left");
-        Elmler_Akademiyasi(id, "Inshaatchilar", "left");
-        Nizami(id, "Elmler Akademiyasi", "left");
-        May_28(id, "Nizami", "left", "green");
-        Ganjlik(id, "28 May", "left", "green");
-        Nariman_Narimanov(id, "Ganjlik", "left", "green");
+        Azadliq_Prospekti(id, MAKE_GREEN_COLOR("Darnagul"), "left");
+        Nasimi(id, MAKE_GREEN_COLOR("Azadliq Prospekti"), "left");
+        Memar_Adjemi_green(id, MAKE_GREEN_COLOR("Nasimi"), "left");
+        Yanvar_20(id, MAKE_GREEN_COLOR("Memar Adjemi"), "left");
+        Inshaatchilar(id, MAKE_GREEN_COLOR("20 Yanvar"), "left");
+        Elmler_Akademiyasi(id, MAKE_GREEN_COLOR("Inshaatchilar"), "left");
+        Nizami(id, MAKE_GREEN_COLOR("Elmler Akademiyasi"), "left");
+        May_28(id, MAKE_GREEN_COLOR("Nizami"), "left", "green");
+        Ganjlik(id, MAKE_GREEN_COLOR("May"), "left", "green");
+        Nariman_Narimanov(id, MAKE_GREEN_COLOR("Ganjlik"), "left", "green");
         if(i % 10 == 0)
         { 
-            Bakmil(id, "Nariman Narimanov", "left", "green");
+            Bakmil(id, MAKE_GREEN_COLOR("Nariman Narimanov"), "left", "green");
             chill_green(id);
             continue;
         }
-        Ulduz(id, "Nariman Narimanov", "left", "green");
-        Koroglu(id, "Ulduz", "left", "green");
-        Gara_Garayev(id, "Koroglu", "left", "green");
-        Neftchiler(id, "Gara Garayev", "left", "green");
-        Xalqlar_Dostlugu(id, "Neftchiler", "left", "green");
-        Ahmedli(id, "Xalqlar Dostlugu", "left", "green");
-        Hazi_Aslanov(id, "Ahmedli", "left", "green");
+        Ulduz(id, MAKE_GREEN_COLOR("Nariman Narimanov"), "left", "green");
+        Koroglu(id, MAKE_GREEN_COLOR("Ulduz"), "left", "green");
+        Gara_Garayev(id, MAKE_GREEN_COLOR("Koroglu"), "left", "green");
+        Neftchiler(id, MAKE_GREEN_COLOR("Gara Garayev"), "left", "green");
+        Xalqlar_Dostlugu(id, MAKE_GREEN_COLOR("Neftchiler"), "left", "green");
+        Ahmedli(id, MAKE_GREEN_COLOR("Xalqlar Dostlugu"), "left", "green");
+        Hazi_Aslanov(id, MAKE_GREEN_COLOR("Ahmedli"), "left", "green");
         chill_red(id);
-        Ahmedli(id, "Hazi Aslanov", "right", "green");
-        Xalqlar_Dostlugu(id, "Ahmedli", "right", "green");
-        Neftchiler(id, "Xalqlar Dostlugu", "right", "green");
-        Gara_Garayev(id, "Neftchiler", "right", "green");
-        Koroglu(id, "Gara Garayev", "right", "green");
-        Ulduz(id, "Koroglu", "right", "green");
+        Ahmedli(id, MAKE_GREEN_COLOR("Hazi Aslanov"), "right", "green");
+        Xalqlar_Dostlugu(id, MAKE_GREEN_COLOR("Ahmedli"), "right", "green");
+        Neftchiler(id, MAKE_GREEN_COLOR("Xalqlar Dostlugu"), "right", "green");
+        Gara_Garayev(id, MAKE_GREEN_COLOR("Neftchiler"), "right", "green");
+        Koroglu(id, MAKE_GREEN_COLOR("Gara Garayev"), "right", "green");
+        Ulduz(id, MAKE_GREEN_COLOR("Koroglu"), "right", "green");
         i++;
     }
 
-    Bakmil(id,"Nariman Narimanov", "left", "green");
+    Bakmil(id,MAKE_GREEN_COLOR("Nariman Narimanov"), "left", "green");
 }
 
 void train_red(int id)
@@ -777,7 +780,7 @@ void train_red(int id)
     chill_red(id);
     Bakmil(id, "Depo", "Depo", "red");
     int i = 0;
-    while(i < 100)
+    while(i < 10)
     {
         Nariman_Narimanov(id, "Bakmil", "right", "red");
         Ganjlik(id, "Nariman Narimanov", "right", "red");
@@ -789,7 +792,7 @@ void train_red(int id)
         May_28(id, "Sahil", "left", "red");
         Ganjlik(id, "28 May", "left", "red");
         Nariman_Narimanov(id, "Ganjlik", "left", "red");
-        if(i == 98)
+        if(i == 9)
         {
             break;
         }
