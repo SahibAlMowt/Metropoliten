@@ -1,7 +1,5 @@
 #include "metro.h"
 
-// male header file !
-
 #define MAKE_LIGHT_GREEN_COLOR(text) "<span style='color:#90EE90;'>" text "</span>"
 
 std::mutex mtx_Cafar_Cabbarli;
@@ -16,7 +14,8 @@ void l_g_update_time(int add_minutes)
     std::lock_guard<std::mutex> lock(l_g_time_mutex);
     l_g_minutes += add_minutes;
     
-    while (l_g_minutes >= 60) {
+    while (l_g_minutes >= 60) 
+    {
         l_g_minutes -= 60;
         l_g_hours++;
     }
@@ -31,14 +30,16 @@ std::string l_g_get_time()
 {
     std::lock_guard<std::mutex> lock(l_g_time_mutex);
     std::ostringstream oss;
+
     oss << std::setw(2) << std::setfill('0') << l_g_hours << ":"
         << std::setw(2) << std::setfill('0') << l_g_minutes;
+
     return oss.str();
 }
 
 void l_g_sleep(int sim_minutes)
 {
-    std::this_thread::sleep_for(std::chrono::seconds(sim_minutes));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100 * sim_minutes));
     l_g_update_time(sim_minutes);
 }
 

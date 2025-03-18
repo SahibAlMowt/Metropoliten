@@ -19,7 +19,8 @@ void v_update_time(int add_minutes)
     std::lock_guard<std::mutex> lock(v_time_mutex);
     v_minutes += add_minutes;
     
-    while (v_minutes >= 60) {
+    while (v_minutes >= 60) 
+    {
         v_minutes -= 60;
         v_hours++;
     }
@@ -30,18 +31,20 @@ void v_update_time(int add_minutes)
     } 
 }
 
-std::string get_time()
+std::string v_get_time()
 {
     std::lock_guard<std::mutex> lock(v_time_mutex);
     std::ostringstream oss;
+
     oss << std::setw(2) << std::setfill('0') << v_hours << ":"
         << std::setw(2) << std::setfill('0') << v_minutes;
+
     return oss.str();
 }
 
 void v_sleep(int sim_minutes)
 {
-    std::this_thread::sleep_for(std::chrono::seconds(sim_minutes));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100 * sim_minutes));
     v_update_time(sim_minutes);
 }
 
@@ -56,7 +59,7 @@ void chill_violet(int id)
 
 void station_violet(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
 {
-    faylik << id << " in " << str << " station from " << from << " in " << get_time() << "\n\n";
+    faylik << id << " in " << str << " station from " << from << " in " << v_get_time() << "\n\n";
     v_sleep(1);
 }
 
@@ -66,7 +69,7 @@ void station_violet(int id, const std::string &str, std::ofstream &faylik, const
 void Xodjasan(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
-    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("Xodjasan") << " from " << from << " in " << get_time() << "\n\n";
+    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("Xodjasan") << " from " << from << " in " << v_get_time() << "\n\n";
     v_sleep(3);
     std::string str = MAKE_VIOLET_COLOR("Xodjasan");
     std::unique_lock<std::mutex> lock(mtx_Xodjasan);
@@ -77,7 +80,7 @@ void Xodjasan(int id, const std::string &from, const std::string &movement)
 void Avtovogzal(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
-    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("Avtovogzal") << " from " << from << " in " << get_time() << "\n\n";
+    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("Avtovogzal") << " from " << from << " in " << v_get_time() << "\n\n";
     v_sleep(3);
     std::string str = MAKE_VIOLET_COLOR("Avtovogzal");
     if(movement == "left")
@@ -97,7 +100,7 @@ void Avtovogzal(int id, const std::string &from, const std::string &movement)
 void Memar_Adjemi_violet(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
-    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("Memar Adjemi") << " from " << from << " in " << get_time() << "\n\n";
+    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("Memar Adjemi") << " from " << from << " in " << v_get_time() << "\n\n";
     v_sleep(3);
     std::string str = MAKE_VIOLET_COLOR("Memar Adjemi");
     if(movement == "left")
@@ -117,7 +120,7 @@ void Memar_Adjemi_violet(int id, const std::string &from, const std::string &mov
 void Noyabr_8(int id, const std::string &from, const std::string &movement)
 {
     std::ofstream file_violet_line("output_violet_line.md", std::ios::app);
-    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("8 Noyabr") << " from " << from << " in " << get_time() << "\n\n";
+    file_violet_line << id << " in way " << MAKE_VIOLET_COLOR("8 Noyabr") << " from " << from << " in " << v_get_time() << "\n\n";
     v_sleep(3);
     std::string str = MAKE_VIOLET_COLOR("8 Noyabr");
     if(movement == "left")
@@ -139,7 +142,7 @@ void train_violet(int id)
     chill_violet(id);
     Xodjasan(id, "Depo", "Depo");
     int i = 0;
-    while(i < 7)
+    while(i < 5)
     {
         Avtovogzal(id, MAKE_VIOLET_COLOR("Xodjasan"), "left");
         Memar_Adjemi_violet(id, MAKE_VIOLET_COLOR("Avtovogzal"), "left");

@@ -17,9 +17,27 @@
 // add.cpp
 
 void website();
+void map_pdf();
+
+//-------------------------------------------------
+//  play with time
+
 void l_g_update_time(int add_minutes);
 std::string l_g_get_time();
 void l_g_sleep(int sim_minutes);
+
+void v_update_time(int add_minutes);
+std::string v_get_time();
+void v_sleep(int sim_minutes);
+
+void g_update_time(int add_minutes);
+std::string g_get_time();
+void g_sleep(int sim_minutes);
+
+void r_update_time(int add_minutes);
+std::string r_get_time();
+void r_sleep(int sim_minutes);
+
 
 //-----------------------------------------------
 

@@ -3,6 +3,8 @@
 int main()
 {
     website();
+    map_pdf();
+
     std::thread red_line(void_red_train);
     std::thread violet_line(void_violet_line);
     std::thread light_green_line(void_light_green_line);
