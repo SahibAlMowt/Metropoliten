@@ -47,8 +47,8 @@ void r_sleep(int sim_minutes);
 void chill_light_green(int id);
 void station_light_green(int id, const std::string &str, std::ofstream &faylik, const std::string &from);
 
-void Cafar_Cabbarli(int id, const std::string &from, const std::string &movement);
-void Xatai(int id, const std::string &from, const std::string &movement);
+void Cafar_Cabbarli(int id, const std::string &from, const std::string &movement, std::ofstream &file_light_green_line);
+void Xatai(int id, const std::string &from, const std::string &movement, std::ofstream &file_light_green_line);
 
 void train_light_green(int id);
 void void_light_green_line();

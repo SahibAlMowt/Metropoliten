@@ -31,8 +31,7 @@ std::string l_g_get_time()
     std::lock_guard<std::mutex> lock(l_g_time_mutex);
     std::ostringstream oss;
 
-    oss << std::setw(2) << std::setfill('0') << l_g_hours << ":"
-        << std::setw(2) << std::setfill('0') << l_g_minutes;
+    oss << std::setw(2) << std::setfill('0') << l_g_hours << ":" << std::setw(2) << std::setfill('0') << l_g_minutes;
 
     return oss.str();
 }
@@ -62,9 +61,8 @@ void station_light_green(int id, const std::string &str, std::ofstream &faylik, 
 
 
 
-void Cafar_Cabbarli(int id, const std::string &from, const std::string &movement)
+void Cafar_Cabbarli(int id, const std::string &from, const std::string &movement, std::ofstream &file_light_green_line)
 {
-    std::ofstream file_light_green_line("output_light_green_line.md", std::ios::app);
     file_light_green_line << id << " in way " << MAKE_LIGHT_GREEN_COLOR("Cafar Cabbarli") << " from " << from << " in " << l_g_get_time() << "\n\n";
     l_g_sleep(3);
     std::string str = MAKE_LIGHT_GREEN_COLOR("Cafar Cabbarli");
@@ -73,9 +71,8 @@ void Cafar_Cabbarli(int id, const std::string &from, const std::string &movement
     lock.unlock();
 }
 
-void Xatai(int id, const std::string &from, const std::string &movement)
+void Xatai(int id, const std::string &from, const std::string &movement, std::ofstream &file_light_green_line)
 {
-    std::ofstream file_light_green_line("output_light_green_line.md", std::ios::app);
     file_light_green_line << id << " in way " << MAKE_LIGHT_GREEN_COLOR("Xatai") << " from " << from << " in " << l_g_get_time() << "\n\n";
     l_g_sleep(3);
     std::string str = MAKE_LIGHT_GREEN_COLOR("Xatai");
@@ -87,12 +84,13 @@ void Xatai(int id, const std::string &from, const std::string &movement)
 void train_light_green(int id)
 {
     int i = 0;
+    std::ofstream file_light_green_line("output_light_green_line.md", std::ios::app);
     chill_light_green(id);
-    Xatai(id, "Depo", "Depo");
+    Xatai(id, "Depo", "Depo", file_light_green_line);
     while(i < 70)
     {
-        Cafar_Cabbarli(id, MAKE_LIGHT_GREEN_COLOR("Xatai"), "right");
-        Xatai(id, MAKE_LIGHT_GREEN_COLOR("Cafar Cabbarli"), "left");
+        Cafar_Cabbarli(id, MAKE_LIGHT_GREEN_COLOR("Xatai"), "right", file_light_green_line);
+        Xatai(id, MAKE_LIGHT_GREEN_COLOR("Cafar Cabbarli"), "left", file_light_green_line);
         i++;
     }
 }
@@ -103,10 +101,10 @@ void void_light_green_line()
 
     int num;
 
+    std::srand(std::time(nullptr));
+
     for(size_t i = 0; i != 2; i++)
     {
-        std::srand(std::time(nullptr));
-
         num = rand() % 1000;
         num += 1259;
         num %= 1000;

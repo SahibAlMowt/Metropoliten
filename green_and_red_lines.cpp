@@ -76,8 +76,7 @@ std::string g_get_time()
     std::lock_guard<std::mutex> lock(g_time_mutex);
     std::ostringstream oss;
 
-    oss << std::setw(2) << std::setfill('0') << g_hours << ":"
-        << std::setw(2) << std::setfill('0') << g_minutes;
+    oss << std::setw(2) << std::setfill('0') << g_hours << ":" << std::setw(2) << std::setfill('0') << g_minutes;
 
     return oss.str();
 }
@@ -111,8 +110,7 @@ std::string r_get_time()
     std::lock_guard<std::mutex> lock(r_time_mutex);
     std::ostringstream oss;
 
-    oss << std::setw(2) << std::setfill('0') << r_hours << ":"
-        << std::setw(2) << std::setfill('0') << r_minutes;
+    oss << std::setw(2) << std::setfill('0') << r_hours << ":" << std::setw(2) << std::setfill('0') << r_minutes;
 
     return oss.str();
 }
@@ -918,7 +916,6 @@ void void_red_train()
 
     for(size_t i = 0; i != 10; i++)
     {
-        
         num = rand() % 1000;
         num += 1000;
 
@@ -945,7 +942,6 @@ void void_green_line()
 
     for(size_t i = 0; i != 10; i++)
     {
-
         num = rand() % 1000;
         num += 1456;
         num %= 1000;

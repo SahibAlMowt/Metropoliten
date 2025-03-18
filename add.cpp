@@ -35,11 +35,11 @@ void map_pdf()
     {   
         #ifdef _WIN32
         {
-            system("start https://metro.gov.az/storage/files/file/6785/wb0yvgzF8cwdj224dHx33pvRW4uI5YxgvVXAMfhz.pdf");
+            system("start https://metro.gov.az/storage/files/file/6784/GrmgC0bDMeWpr1Y6amR3iTL76io1evDVWfywqkbr.pdf");
         }
         #elif __linux__
         {
-            system("xdg-open https://metro.gov.az/storage/files/file/6785/wb0yvgzF8cwdj224dHx33pvRW4uI5YxgvVXAMfhz.pdf");
+            system("xdg-open https://metro.gov.az/storage/files/file/6784/GrmgC0bDMeWpr1Y6amR3iTL76io1evDVWfywqkbr.pdf");
         }
         #else
         std::cout << "Unsupported OS\n";

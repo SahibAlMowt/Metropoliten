@@ -36,8 +36,7 @@ std::string v_get_time()
     std::lock_guard<std::mutex> lock(v_time_mutex);
     std::ostringstream oss;
 
-    oss << std::setw(2) << std::setfill('0') << v_hours << ":"
-        << std::setw(2) << std::setfill('0') << v_minutes;
+    oss << std::setw(2) << std::setfill('0') << v_hours << ":" << std::setw(2) << std::setfill('0') << v_minutes;
 
     return oss.str();
 }
@@ -150,7 +149,7 @@ void train_violet(int id)
         chill_violet(id);
         Memar_Adjemi_violet(id, MAKE_VIOLET_COLOR("8 Noyabr"), "right");
         Avtovogzal(id, MAKE_VIOLET_COLOR("Memar Adjemi"), "right");
-        if(i == 68)
+        if(i == 4)
         {
             break;
         }
@@ -168,10 +167,10 @@ void void_violet_line()
 
     int num;
 
+    std::srand(std::time(nullptr));
+
     for(size_t i = 0; i != 6; i++)
     {
-        std::srand(std::time(nullptr));
-
         num = rand() % 1000;
         num += 1137;
         num %= 1000;
