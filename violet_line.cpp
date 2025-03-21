@@ -141,7 +141,7 @@ void train_violet(int id)
     chill_violet(id);
     Xodjasan(id, "Depo", "Depo");
     int i = 0;
-    while(i < 5)
+    while(i < 6)
     {
         Avtovogzal(id, MAKE_VIOLET_COLOR("Xodjasan"), "left");
         Memar_Adjemi_violet(id, MAKE_VIOLET_COLOR("Avtovogzal"), "left");
@@ -149,7 +149,7 @@ void train_violet(int id)
         chill_violet(id);
         Memar_Adjemi_violet(id, MAKE_VIOLET_COLOR("8 Noyabr"), "right");
         Avtovogzal(id, MAKE_VIOLET_COLOR("Memar Adjemi"), "right");
-        if(i == 4)
+        if(i == 5)
         {
             break;
         }

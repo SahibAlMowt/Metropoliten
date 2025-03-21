@@ -54,6 +54,9 @@ std::mutex r_time_mutex;
 int r_hours = 5;
 int r_minutes = 0;
 
+std::mutex file_red_mtx;
+std::mutex file_green_mtx;
+
 void g_update_time(int add_minutes)
 {
     std::lock_guard<std::mutex> lock(g_time_mutex);
@@ -81,10 +84,10 @@ std::string g_get_time()
     return oss.str();
 }
 
-void g_sleep(int sim_minutes)
+void g_sleep(int add_minutes)
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100 * sim_minutes));
-    g_update_time(sim_minutes);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100 * add_minutes));
+    g_update_time(add_minutes);
 }
 
 
@@ -115,10 +118,10 @@ std::string r_get_time()
     return oss.str();
 }
 
-void r_sleep(int sim_minutes)
+void r_sleep(int add_minutes)
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100 * sim_minutes));
-    r_update_time(sim_minutes);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100 * add_minutes));
+    r_update_time(add_minutes);
 }
 
 
@@ -139,13 +142,19 @@ void chill_red(int id)
 
 void station_red(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
 {
-    faylik << id << " in " << str << " station from " << from << " in " << r_get_time() << "\n\n";
+    {
+        std::lock_guard<std::mutex> lock(file_red_mtx);
+        faylik << id << " in " << str << " station from " << from << " in " << r_get_time() << "\n\n";
+    }
     r_sleep(1);
 }
 
 void station_green(int id, const std::string &str, std::ofstream &faylik, const std::string &from)
 {
-    faylik << id << " in " << str << " station from " << from << " in " << g_get_time() << "\n\n" ;
+    {
+        std::lock_guard<std::mutex> lock(file_green_mtx);
+        faylik << id << " in " << str << " station from " << from << " in " << g_get_time() << "\n\n" ;
+    }
     g_sleep(1);
 }
 
@@ -799,10 +808,10 @@ void train_green(int id)
     chill_green(id);
     Bakmil(id,"Depo", "Depo", "green");
     int i = 0;
-    while(i < 4)
+    while(i < 2)
     {
         Nariman_Narimanov(id, MAKE_GREEN_COLOR("Bakmil"), "right", "green");
-        if(i == 3)
+        if(i == 1)
         {
             break;
         }
@@ -827,7 +836,7 @@ void train_green(int id)
         May_28(id, MAKE_GREEN_COLOR("Nizami"), "left", "green");
         Ganjlik(id, MAKE_GREEN_COLOR("May"), "left", "green");
         Nariman_Narimanov(id, MAKE_GREEN_COLOR("Ganjlik"), "left", "green");
-        if(i == 1 && i < 1501)
+        if(id < 1201)
         { 
             Bakmil(id, MAKE_GREEN_COLOR("Nariman Narimanov"), "left", "green");
             chill_green(id);
@@ -858,7 +867,7 @@ void train_red(int id)
     chill_red(id);
     Bakmil(id, "Depo", "Depo", "red");
     int i = 0;
-    while(i < 3)
+    while(i < 2)
     {
         Nariman_Narimanov(id, MAKE_RED_COLOR("Bakmil"), "right", "red");
         Ganjlik(id, MAKE_RED_COLOR("Nariman Narimanov"), "right", "red");
@@ -870,11 +879,11 @@ void train_red(int id)
         May_28(id, MAKE_RED_COLOR("Sahil"), "left", "red");
         Ganjlik(id, MAKE_RED_COLOR("28 May"), "left", "red");
         Nariman_Narimanov(id, MAKE_RED_COLOR("Ganjlik"), "left", "red");
-        if(i == 2)
+        if(i == 1)
         {
             break;
         }
-        if(i == 1 && id < 1501)
+        if(id < 1201)
         { 
             Bakmil(id, MAKE_RED_COLOR("Nariman Narimanov"), "left", "red");
             chill_red(id);
