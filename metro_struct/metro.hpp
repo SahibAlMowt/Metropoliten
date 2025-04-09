@@ -26,6 +26,20 @@ namespace sam
 
     extern std::map<std::string, std::mutex> gr_stations_mtx;
 
+    struct Virtual_time
+    {
+        int hours = 5;
+        int minutes = 0;
+
+        std::mutex v_t_mtx;
+
+        void update_time(const int &add_time);
+        std::string get_time();
+        void sleep(const int &add_time);
+    };
+
+    extern Virtual_time global_time; 
+
     namespace red_line
     {
         class Red_line
@@ -37,15 +51,8 @@ namespace sam
             std::mutex file_mtx;
 
             const int measure = 3;
-            int hours = 5;
-            int minutes = 0;
 
             std::ofstream filename;
-
-            void update_time(const int &add_time);
-            std::string get_time();
-            void sleep(const int &add_time);
-
 
         public:
             Red_line();
@@ -133,14 +140,8 @@ namespace sam
             std::mutex file_mtx;
 
             const int measure = 3;
-            int hours = 5;
-            int minutes = 0;
 
             std::ofstream filename;
-
-            void update_time(const int &add_time);
-            std::string get_time();
-            void sleep(const int &add_time);
 
         public:
             
