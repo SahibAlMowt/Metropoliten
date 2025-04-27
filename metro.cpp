@@ -2,7 +2,7 @@
 
 namespace sam
 {
-    std::map<std::string, std::mutex> gr_stations_mtx;
+    std::map<std::string, std::pair<std::mutex, std::mutex>> gr_stations_mtx;
 
     void get_mtx()
     {
@@ -105,8 +105,9 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
 
     while(sam::red_line::Red_line::is_working_time())
     {
+        std::mutex &current_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
         {
-            std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+            std::lock_guard<std::mutex> lock(current_mutex);
 
             std::ostringstream oss;
             if(going_forward)
@@ -143,8 +144,8 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
             }
         }
 
-        
-        std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+        std::mutex &new_station_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(new_station_mutex);
         
         std::ostringstream oss;
         oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
@@ -158,8 +159,9 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
 
     while(!(stations[current_station].name == "Nariman Narimanov" && prev_station == "Ganjlik"))
     {
+        std::mutex &current_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
         {
-            std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+            std::lock_guard<std::mutex> lock(current_mutex);
 
             std::ostringstream oss;
             if(going_forward)
@@ -195,8 +197,8 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
             }
         }
         
-
-        std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+        std::mutex &new_station_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(new_station_mutex);
             
         std::ostringstream oss;
         oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
@@ -213,7 +215,8 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
     }
 
     {
-        std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+        std::mutex &current_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(current_mutex);
 
         std::ostringstream oss;
 
@@ -227,7 +230,8 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
     current_station = stations["Bakmil"].name;
 
     {
-        std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+        std::mutex &new_station_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(new_station_mutex);
             
         std::ostringstream oss;
         oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
@@ -237,7 +241,8 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
     
 
     {
-        std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+        std::mutex &last_station_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(last_station_mutex);
 
         std::ostringstream oss;
         oss << "[ " << global_time.get_time() << " ] Train " << train_id << " has stopped for the night.\n";
@@ -705,7 +710,8 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
     while(sam::green_line::Green_line::is_working_time())
     {
         {
-            std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+            std::mutex &current_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+            std::lock_guard<std::mutex> lock(current_mutex);
 
             std::ostringstream oss;
             if(going_forward)
@@ -742,8 +748,8 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
             }
         }
 
-        
-        std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+        std::mutex &new_station_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(new_station_mutex);
         
         std::ostringstream oss;
         oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
@@ -757,8 +763,9 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
 
     while(!(stations[current_station].name == "Nariman Narimanov" && prev_station == "Ganjlik"))
     {
+        std::mutex &current_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
         {
-            std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+            std::lock_guard<std::mutex> lock(current_mutex);
 
             std::ostringstream oss;
             if(going_forward)
@@ -794,8 +801,8 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
             }
         }
         
-
-        std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+        std::mutex &new_station_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(new_station_mutex);
             
         std::ostringstream oss;
         oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
@@ -812,7 +819,8 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
     }
 
     {
-        std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+        std::mutex &new_station_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(new_station_mutex);
 
         std::ostringstream oss;
 
@@ -826,7 +834,8 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
     current_station = stations["Bakmil"].name;
 
     {
-        std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+        std::mutex &new_station_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(new_station_mutex);
             
         std::ostringstream oss;
         oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
@@ -835,7 +844,8 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
     }
 
     {
-        std::lock_guard<std::mutex> lock(sam::gr_stations_mtx[current_station]);
+        std::mutex &last_station_mutex = going_forward ? sam::gr_stations_mtx[current_station].first : sam::gr_stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(last_station_mutex);
 
         std::ostringstream oss;
         oss << "[ " << global_time.get_time() << " ] Train " << train_id << " has stopped for the night.\n";

@@ -24,7 +24,7 @@ namespace sam
     void fill_green_and_red_line(std::map<std::string, sam::Station> &stations);
     void get_mtx();
 
-    extern std::map<std::string, std::mutex> gr_stations_mtx;
+    extern std::map<std::string, std::pair<std::mutex, std::mutex>> gr_stations_mtx;
 
     struct Virtual_time
     {
