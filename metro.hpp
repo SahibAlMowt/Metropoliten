@@ -72,7 +72,7 @@ namespace sam
         {
         private:
             std::map<std::string, Station> stations;
-            std::map<std::string, std::mutex> stations_mtx;
+            std::map<std::string, std::pair<std::mutex, std::mutex>> stations_mtx;
 
             std::mutex time_mtx;
             std::mutex file_mtx;

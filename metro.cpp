@@ -313,8 +313,9 @@ void sam::violet_line::Violet_line::move_train(const size_t &train_id, const std
 
     while(sam::violet_line::Violet_line::is_working_time(virtual_hour))
     {
+        std::mutex &current_mutex = going_forward ? stations_mtx[current_station].first : stations_mtx[current_station].second;
         {
-            std::lock_guard<std::mutex> lock(stations_mtx[current_station]);
+            std::lock_guard<std::mutex> lock(current_mutex);
 
             if(going_forward)
             {
@@ -366,9 +367,9 @@ void sam::violet_line::Violet_line::move_train(const size_t &train_id, const std
                 going_forward = true;
             }
         }
-
+            std::mutex &new_station_mutex = going_forward ? stations_mtx[current_station].first : stations_mtx[current_station].second;
         
-            std::lock_guard<std::mutex> lock(stations_mtx[current_station]);
+            std::lock_guard<std::mutex> lock(new_station_mutex);
             
             std::ostringstream oss;
             oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
@@ -394,8 +395,9 @@ void sam::violet_line::Violet_line::move_train(const size_t &train_id, const std
 
     while(stations[current_station].name != "Xodjasan")
     {
+        std::mutex &current_mutex = going_forward ? stations_mtx[current_station].first : stations_mtx[current_station].second;
         {
-            std::lock_guard<std::mutex> lock(stations_mtx[current_station]);
+            std::lock_guard<std::mutex> lock(current_mutex);
 
             std::ostringstream oss;
             if(going_forward)
@@ -440,9 +442,10 @@ void sam::violet_line::Violet_line::move_train(const size_t &train_id, const std
         {
             current_station = stations[current_station].previous;
         }
-        
 
-        std::lock_guard<std::mutex> lock(stations_mtx[current_station]);
+        std::mutex &new_station_mutex = going_forward ? stations_mtx[current_station].first : stations_mtx[current_station].second;
+
+        std::lock_guard<std::mutex> lock(new_station_mutex);
             
         std::ostringstream oss;
         oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
@@ -467,7 +470,8 @@ void sam::violet_line::Violet_line::move_train(const size_t &train_id, const std
     }
 
     {
-        std::lock_guard<std::mutex> lock(stations_mtx[current_station]);
+        std::mutex &last_station_mutex = going_forward ? stations_mtx[current_station].first : stations_mtx[current_station].second;
+        std::lock_guard<std::mutex> lock(last_station_mutex);
 
         std::ostringstream oss;
         oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " has stopped for the night.\n";
