@@ -156,6 +156,9 @@ namespace sam
             void write_to_file(const std::string &message);
         };
     }
+
+    void website();
+    void map_pdf();
 }
 
 #endif //METRO_HPP

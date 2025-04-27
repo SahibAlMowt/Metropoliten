@@ -94,7 +94,7 @@ sam::red_line::Red_line::~Red_line()
 
 bool sam::red_line::Red_line::is_working_time()
 {
-    return (global_time.hours >= 5 || global_time.hours < 1);
+    return (global_time.hours >= 5 && global_time.hours < 20);
 }
 
 void sam::red_line::Red_line::move_train(const size_t &train_id, const std::string &start_station)
@@ -698,7 +698,7 @@ sam::green_line::Green_line::~Green_line()
 
 bool sam::green_line::Green_line::is_working_time()
 {
-    return (global_time.hours >= 5 || global_time.hours < 1);
+    return (global_time.hours >= 5 && global_time.hours < 20);
 }
 
 void sam::green_line::Green_line::move_train(const size_t &train_id, const std::string &start_station)
@@ -880,5 +880,57 @@ void sam::green_line::Green_line::write_to_file(const std::string &message)
     else
     {
         std::cout << "ERROR in light_green_line\n";
+    }
+}
+
+
+void sam::website()
+{
+    std::string str_mes;
+    std::cout << "do you want to visit the website? (yes or !yes)\n";
+    std::cin >> str_mes;
+    if(str_mes == "yes")
+    {   
+        #ifdef _WIN32
+        {
+            system("start https://metro.gov.az/az");
+        }
+        #elif __linux__
+        {
+            system("xdg-open https://metro.gov.az/az");
+        }
+        #else
+        std::cout << "Unsupported OS\n";
+        #endif
+    }
+    else
+    {
+        std::cout << "then, let's go!\n";
+    }
+}
+
+void sam::map_pdf()
+{
+    std::string str_mes_pdf; 
+    std::cout << "do you want to check map? (yes or !yes)\n";
+    std::cin >> str_mes_pdf;
+
+    if(str_mes_pdf == "yes")
+    {   
+        #ifdef _WIN32
+        {
+            system("start https://metro.gov.az/storage/files/file/6784/GrmgC0bDMeWpr1Y6amR3iTL76io1evDVWfywqkbr.pdf");
+        }
+        #elif __linux__
+        {
+            system("xdg-open https://metro.gov.az/storage/files/file/6784/GrmgC0bDMeWpr1Y6amR3iTL76io1evDVWfywqkbr.pdf");
+        }
+        #else
+        std::cout << "Unsupported OS\n";
+        #endif
+    }
+    else
+    {
+        std::cout << "then, let's go!\n";
     }
 }

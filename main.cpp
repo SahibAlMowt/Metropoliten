@@ -4,6 +4,9 @@ int main()
 {
     sam::get_mtx();
 
+    sam::website();
+    sam::map_pdf();
+
     sam::red_line::Red_line metro_red;
   //  sam::violet_line::Violet_line metro_violet;
   //  sam::light_green_line::Light_green_line metro_light_green;
