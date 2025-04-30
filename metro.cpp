@@ -1,6 +1,10 @@
 #include "metro.hpp"
 
 #define LIGHT_GREEN_HTML(text) "<span style=\"color:rgb(0, 255, 0);\">" << text << "</span>"
+#define VIOLET_HTML(text) "<span style=\"color:rgb(166, 11, 88);\">" << text << "</span>"
+#define GREEN_HTML(text) "<span style=\"color:rgb(29, 161, 75);\">" << text << "</span>"
+#define RED_HTML(text) "<span style=\"color:rgb(255, 0, 0);\">" << text << "</span>"
+
 namespace sam
 {
     std::map<std::string, std::pair<std::mutex, std::mutex>> gr_stations_mtx;
@@ -113,11 +117,11 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
             std::ostringstream oss;
             if(going_forward)
             {
-                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].next << "\n";                
+                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << RED_HTML(stations[current_station].name) << " ---> " << RED_HTML(stations[current_station].next) << "\n\n";                
             }
             else
             {
-                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].previous << "\n";
+                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << RED_HTML(stations[current_station].name) << " ---> " << RED_HTML(stations[current_station].previous) << "\n\n";
             }
             write_to_file(oss.str());
 
@@ -149,7 +153,7 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
         std::lock_guard<std::mutex> lock(new_station_mutex);
         
         std::ostringstream oss;
-        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
+        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << RED_HTML(stations[current_station].name) << " station\n\n";
         write_to_file(oss.str());
 
         global_time.sleep(1);
@@ -167,11 +171,11 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
             std::ostringstream oss;
             if(going_forward)
             { 
-                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].next << "\n";                
+                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << RED_HTML(stations[current_station].name) << " ---> " << RED_HTML(stations[current_station].next) << "\n\n";                
             }
             else
             {
-                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].previous << "\n";
+                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << RED_HTML(stations[current_station].name) << " ---> " << RED_HTML(stations[current_station].previous) << "\n\n";
             }
             write_to_file(oss.str());
         }
@@ -202,7 +206,7 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
         std::lock_guard<std::mutex> lock(new_station_mutex);
             
         std::ostringstream oss;
-        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
+        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << RED_HTML(stations[current_station].name) << " station\n\n";
         write_to_file(oss.str());
 
         if(going_forward)
@@ -221,7 +225,7 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
 
         std::ostringstream oss;
 
-        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations["Bakmil"].name << "\n";
+        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << RED_HTML(stations[current_station].name) << " ---> " << RED_HTML(stations["Bakmil"].name) << "\n\n";
 
         write_to_file(oss.str());
     }
@@ -235,7 +239,7 @@ void sam::red_line::Red_line::move_train(const size_t &train_id, const std::stri
         std::lock_guard<std::mutex> lock(new_station_mutex);
             
         std::ostringstream oss;
-        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
+        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << RED_HTML(stations[current_station].name) << " station\n\n";
         write_to_file(oss.str());
         
     }
@@ -326,13 +330,13 @@ void sam::violet_line::Violet_line::move_train(const size_t &train_id, const std
             if(going_forward)
             {
                 std::ostringstream oss;
-                oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].next << "\n";                
+                oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " moving: " << VIOLET_HTML(stations[current_station].name) << " ---> " << VIOLET_HTML(stations[current_station].next) << "\n\n";                
                 write_to_file(oss.str());
             }
             else
             {
                 std::ostringstream oss;
-                oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].previous << "\n";
+                oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " moving: " << VIOLET_HTML(stations[current_station].name) << " ---> " << VIOLET_HTML(stations[current_station].previous) << "\n\n";
                 write_to_file(oss.str());
             }
         }
@@ -378,7 +382,7 @@ void sam::violet_line::Violet_line::move_train(const size_t &train_id, const std
             std::lock_guard<std::mutex> lock(new_station_mutex);
             
             std::ostringstream oss;
-            oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
+            oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " in " << VIOLET_HTML(stations[current_station].name) << " station\n\n";
             write_to_file(oss.str());
 
             {
@@ -408,11 +412,11 @@ void sam::violet_line::Violet_line::move_train(const size_t &train_id, const std
             std::ostringstream oss;
             if(going_forward)
             { 
-                oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].next << "\n";                
+                oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " moving: " << VIOLET_HTML(stations[current_station].name) << " ---> " << VIOLET_HTML(stations[current_station].next) << "\n\n";                
             }
             else
             {
-                oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].previous << "\n";
+                oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " moving: " << VIOLET_HTML(stations[current_station].name) << " ---> " << VIOLET_HTML(stations[current_station].previous) << "\n\n";
             }
             write_to_file(oss.str());
         }
@@ -454,7 +458,7 @@ void sam::violet_line::Violet_line::move_train(const size_t &train_id, const std
         std::lock_guard<std::mutex> lock(new_station_mutex);
             
         std::ostringstream oss;
-        oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
+        oss << "[ " << std::setw(2) << std::setfill('0') << virtual_hour << ":" << std::setw(2) << std::setfill('0') << virtual_minutes << " ] Train " << train_id << " in " << VIOLET_HTML(stations[current_station].name) << " station\n\n";
         write_to_file(oss.str());
 
         {
@@ -717,11 +721,11 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
             std::ostringstream oss;
             if(going_forward)
             {
-                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].next << "\n";                
+                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << GREEN_HTML(stations[current_station].name) << " ---> " << GREEN_HTML(stations[current_station].next) << "\n\n";                
             }
             else
             {
-                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].previous << "\n";
+                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << GREEN_HTML(stations[current_station].name) << " ---> " << GREEN_HTML(stations[current_station].previous) << "\n\n";
             }
             write_to_file(oss.str());
 
@@ -753,7 +757,7 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
         std::lock_guard<std::mutex> lock(new_station_mutex);
         
         std::ostringstream oss;
-        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
+        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << GREEN_HTML(stations[current_station].name) << " station\n\n";
         write_to_file(oss.str());
 
         global_time.sleep(1);
@@ -771,11 +775,11 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
             std::ostringstream oss;
             if(going_forward)
             { 
-                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].next << "\n";                
+                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << GREEN_HTML(stations[current_station].name) << " ---> " << GREEN_HTML(stations[current_station].next) << "\n\n";                
             }
             else
             {
-                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations[current_station].previous << "\n";
+                oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << GREEN_HTML(stations[current_station].name) << " ---> " << GREEN_HTML(stations[current_station].previous) << "\n\n";
             }
             write_to_file(oss.str());
         }
@@ -806,7 +810,7 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
         std::lock_guard<std::mutex> lock(new_station_mutex);
             
         std::ostringstream oss;
-        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
+        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << GREEN_HTML(stations[current_station].name) << " station\n\n";
         write_to_file(oss.str());
 
         if(going_forward)
@@ -825,7 +829,7 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
 
         std::ostringstream oss;
 
-        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << stations[current_station].name << " ---> " << stations["Bakmil"].name << "\n";
+        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " moving: " << GREEN_HTML(stations[current_station].name) << " ---> " << GREEN_HTML(stations["Bakmil"].name) << "\n\n";
 
         write_to_file(oss.str());
     }
@@ -839,7 +843,7 @@ void sam::green_line::Green_line::move_train(const size_t &train_id, const std::
         std::lock_guard<std::mutex> lock(new_station_mutex);
             
         std::ostringstream oss;
-        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << stations[current_station].name << " station\n";
+        oss << "[ " << global_time.get_time() << " ] Train " << train_id << " in " << GREEN_HTML(stations[current_station].name) << " station\n\n";
         write_to_file(oss.str());
         
     }
